@@ -102,7 +102,7 @@ export default function Footer() {
               <li className="flex items-center text-gray-600">
                 <Mail className="w-5 h-5 mr-3 text-blue-600" />
                 <a href="mailto:contact@leadafrica.org" className="hover:text-blue-600 transition-colors">
-                  contact@leadafrica.org
+                  info@leadfoundationafrica.org
                 </a>
               </li>
               <li className="flex items-center text-gray-600">
@@ -113,7 +113,7 @@ export default function Footer() {
               </li>
               <li className="flex items-start text-gray-600">
                 <MapPin className="w-5 h-5 mr-3 text-blue-600 mt-1" />
-                <span>123 Unity Plaza, Nairobi, Kenya</span>
+                <span> Nairobi, Kenya</span>
               </li>
             </ul>
           </FooterSection>
