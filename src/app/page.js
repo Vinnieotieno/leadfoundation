@@ -1,8 +1,8 @@
-import Hero from "./sections/Hero"
-import Programs from "./sections/Programs"
-import Newsletter from "./sections/Newsletter"
-import Story from "./sections/Story"
-import Impact from "./sections/Impact"
+import Hero from "./_sections/Hero"
+import Programs from "./_sections/Programs"
+import Newsletter from "./_sections/Newsletter"
+import Story from "./_sections/Story"
+import Impact from "./_sections/Impact"
 
 
 export default function Home() {
