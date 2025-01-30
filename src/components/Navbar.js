@@ -38,7 +38,7 @@ const navbarLinks = [
   { link: "Services", path: "/services" },
   { link: "Gallery", path: "/gallery" },
   { link: "Contact Us", path: "/contact-us" },
-  { link: "Blog", path: "/blog" },
+  { link: "Updates", path: "/updates" },
 ]
 
 const MobileMenu = ({ isOpen, onClose }) => (
