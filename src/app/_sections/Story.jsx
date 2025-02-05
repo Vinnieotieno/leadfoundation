@@ -10,7 +10,7 @@ const stories = [
     title: "Empowering Communities",
     description:
       "Through sustainable development initiatives, we've helped over 100 communities achieve self-sufficiency and economic growth.",
-    image: "/story2.png",
+    image: "/lf6.jpg",
   },
   {
     title: "Education First",

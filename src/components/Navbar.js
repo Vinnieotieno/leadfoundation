@@ -35,7 +35,7 @@ const navbarLinks = [
   { link: "Home", path: "/" },
   { link: "About", path: "/about" },
   { link: "Our Leadership", path: "/leadership" },
-  { link: "Services", path: "/services" },
+  { link: "Programmes", path: "/programmes" },
   { link: "Gallery", path: "/gallery" },
   { link: "Contact Us", path: "/contact-us" },
   { link: "Updates", path: "/updates" },

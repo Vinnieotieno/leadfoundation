@@ -7,7 +7,7 @@ import { ChevronRight, Users, Sprout, GraduationCap, Heart } from "lucide-react"
 const programs = [
   {
     title: "Community Development",
-    image: "/placeholder.png",
+    image: "/lf6.jpg",
     description: "Supporting local initiatives and empowering communities through sustainable development programs",
     icon: Users,
     color: "bg-blue-500",
@@ -15,7 +15,7 @@ const programs = [
   },
   {
     title: "Sustainable Agriculture",
-    image: "/placeholder.png",
+    image: "/lf7.jpg",
     description: "Promoting sustainable farming practices and food security initiatives",
     icon: Sprout,
     color: "bg-green-500",
@@ -23,7 +23,7 @@ const programs = [
   },
   {
     title: "Education",
-    image: "/placeholder.png",
+    image: "/lf3.jpg",
     description: "Providing access to quality education and skills development programs",
     icon: GraduationCap,
     color: "bg-yellow-500",
@@ -31,7 +31,7 @@ const programs = [
   },
   {
     title: "Healthcare",
-    image: "/placeholder.png",
+    image: "/lf4.jpg",
     description: "Improving access to healthcare services and promoting community wellness",
     icon: Heart,
     color: "bg-red-500",
