@@ -1,225 +1,193 @@
-'use client'
+"use client"
 
-import React, { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Card, CardContent } from "@/components/ui/card"
-import { LinkedinIcon as LinkedIn, Twitter, Mail, ArrowUpRight } from 'lucide-react'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { LinkedinIcon as LinkedIn, Twitter, Mail, ArrowUpRight, Users, UserCog, Globe } from "lucide-react";
+
+const TeamMemberCard = ({ member }) => (
+  <motion.div
+    whileHover={{ scale: 1.05 }}
+    className="bg-white rounded-2xl shadow-lg p-6 transition-all hover:shadow-2xl"
+  >
+    <img src={member.image} alt={member.name} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" />
+    <h3 className="text-xl font-semibold text-center text-gray-800">{member.name}</h3>
+    <p className="text-center text-purple-600 text-sm">{member.role}</p>
+    <p className="text-center text-gray-600 mt-2 text-sm">{member.bio}</p>
+    <p className="text-center text-gray-500 mt-2 text-xs">{member.experience}</p>
+    <p className="text-center text-gray-500 text-xs">{member.location}</p>
+    <div className="flex justify-center gap-2 mt-4">
+      <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:scale-110">
+        <LinkedIn className="w-5 h-5" />
+      </a>
+      <a href={member.social.twitter} target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:scale-110">
+        <Twitter className="w-5 h-5" />
+      </a>
+      <a href={member.social.email} className="text-purple-600 hover:scale-110">
+        <Mail className="w-5 h-5" />
+      </a>
+      {member.website && (
+        <a href={member.website} target="_blank" rel="noopener noreferrer" className="text-green-600 hover:scale-110">
+          <Globe className="w-5 h-5" />
+        </a>
+      )}
+    </div>
+    <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" className="mt-4 block text-center text-sm text-purple-600 font-semibold flex items-center justify-center">
+      View Full Profile <ArrowUpRight className="w-4 h-4 ml-1" />
+    </a>
+  </motion.div>
+);
 
 const TeamSection = () => {
-  const [hoveredMember, setHoveredMember] = useState(null)
+  const [selectedTab, setSelectedTab] = useState("board");
 
-  const team = [
-    {
-      id: 1,
-      name: "Clarian Makungu",
-      role: "Director Lead Foundation Africa",
-      image: "/clarian.jpg",
-      bio: "Pioneering health through community initiatives.",
-      expertise: ["Community Health", "Program Development", "Strategic Planning"],
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "clarian@leadafoundationafrica.org"
-      }
-    },
-    {
-      id: 2,
-      name: "Samuel Kironyo",
-      role: "Coordinator",
-      image: "/sam.jpg",
-      bio: "Drives to uplift underserved communities through sustainable initiatives.",
-      expertise: ["Project Management", "Community Engagement", "Strategic Planning"],
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "sam@leadfoundationafrica.org"
-      }
-    },
-    {
-      id: 3,
-      name: "Roselyne Brown",
-      role: "Senior Program Manager",
-      image: "/roselyn.jpg",
-      bio: "Dedicated to promoting long-term growth in communities across Africa.",
-      expertise: ["Program Management", "Leadership Development", "Strategic Planning"],
-      social: {
-        linkedin: "#",
-        twitter: "#",
-        email: "roselyn@leadafoundationafrica.org"
-      }
-    },
-    
-  ]
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  }
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
-  }
+  const teams = {
+    board: [
+      {
+        id: 1,
+        name: "Clarian Makungu",
+        role: "Director Lead Foundation Africa",
+        image: "/clarian.jpg",
+        bio: "Pioneering health through community initiatives.",
+        expertise: ["Community Health", "Program Development", "Strategic Planning"],
+        experience: "15 years in public health initiatives across Africa.",
+        location: "Nairobi, Kenya",
+        website: "https://clarianmakungu.com",
+        social: {
+          linkedin: "https://linkedin.com/in/clarian",
+          twitter: "https://twitter.com/clarian",
+          email: "mailto:clarian@leadafoundationafrica.org",
+        },
+      },
+      {
+        id: 2,
+        name: "Samuel Kironyo",
+        role: "Board Member",
+        image: "/sam.jpg",
+        bio: "Drives to uplift underserved communities through sustainable initiatives.",
+        expertise: ["Project Management", "Community Engagement", "Strategic Planning"],
+        experience: "10 years in community leadership.",
+        location: "Mombasa, Kenya",
+        website: "https://samuelkironyo.com",
+        social: {
+          linkedin: "https://linkedin.com/in/samuel",
+          twitter: "https://twitter.com/samuel",
+          email: "mailto:sam@leadfoundationafrica.org",
+        },
+      },
+      {
+        id: 3,
+        name: "Roselyne Brown",
+        role: "Board Member",
+        image: "/roselyne.jpg",
+        bio: "Dedicated to promoting long-term growth in communities across Africa.",
+        expertise: ["Program Management", "Leadership Development", "Strategic Planning"],
+        experience: "12 years in program management.",
+        location: "Kigali, Rwanda",
+        website: "https://roselynebrown.com",
+        social: {
+          linkedin: "https://linkedin.com/in/roselyne",
+          twitter: "https://twitter.com/roselyne",
+          email: "mailto:roselyne@leadfoundationafrica.org",
+        },
+      },
+      {
+        id: 4,
+        name: "James Otieno",
+        role: "Board Member",
+        image: "/james.jpg",
+        bio: "Passionate about sustainable development and policy-making.",
+        expertise: ["Policy Development", "Economic Planning", "Sustainability"],
+        experience: "18 years in economic planning.",
+        location: "Accra, Ghana",
+        website: "https://jamesotieno.com",
+        social: {
+          linkedin: "https://linkedin.com/in/james",
+          twitter: "https://twitter.com/james",
+          email: "mailto:james@leadfoundationafrica.org",
+        },
+      },
+    ],
+    management: [
+      {
+        id: 5,
+        name: "Dr. Patrick Maina",
+        role: "Executive Director",
+        image: "/patrick.jpg",
+        bio: "Leading strategic initiatives for community development.",
+        expertise: ["Strategic Leadership", "Community Development", "Healthcare"],
+        experience: "20 years in strategic leadership.",
+        location: "Nairobi, Kenya",
+        website: "https://patrickmaina.com",
+        social: {
+          linkedin: "https://linkedin.com/in/patrick",
+          twitter: "https://twitter.com/patrick",
+          email: "mailto:patrick@leadfoundationafrica.org",
+        },
+      },
+      {
+        id: 6,
+        name: "Lucy Luna",
+        role: "Program Manager",
+        image: "/lucy.jpg",
+        bio: "Implementing effective community programs across regions.",
+        expertise: ["Program Implementation", "Team Leadership", "Community Outreach"],
+        experience: "14 years in program management.",
+        location: "Lagos, Nigeria",
+        website: "https://lucyluna.com",
+        social: {
+          linkedin: "https://linkedin.com/in/lucy",
+          twitter: "https://twitter.com/lucy",
+          email: "mailto:lucy@leadfoundationafrica.org",
+        },
+      },
+      {
+        id: 7,
+        name: "Eric Chivumba",
+        role: "Operations Manager",
+        image: "/eric.jpg",
+        bio: "Ensuring smooth operational execution of all initiatives.",
+        expertise: ["Operations Management", "Process Optimization", "Team Coordination"],
+        experience: "16 years in operational leadership.",
+        location: "Dar es Salaam, Tanzania",
+        website: "https://ericchivumba.com",
+        social: {
+          linkedin: "https://linkedin.com/in/eric",
+          twitter: "https://twitter.com/eric",
+          email: "mailto:eric@leadfoundationafrica.org",
+        },
+      },
+    ],
+  };
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-br from-blue-200 via-purple-200 to-pink-200">
-      {/* Background */}
-      <div className="absolute inset-0 z-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: "url('/lf7.jpg')",
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          filter: 'blur(100px)'
-        }} />
-      </div>
-
-      <div className="container mx-auto px-4 relative z-10">
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="max-w-6xl mx-auto"
-        >
-          {/* Header */}
-          <motion.div 
-            variants={cardVariants}
-            className="text-center mb-16"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600">
-              Our Inspiring Team
-            </h2>
-            <p className="text-gray-700 max-w-2xl mx-auto">
-              Meet our passionate specialists empowering communities with their expertise and boundless dedication.
-            </p>
-          </motion.div>
-
-          {/* Team Grid */}
-          <motion.div 
-            variants={containerVariants}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
-            {team.map((member) => (
-              <motion.div
-                key={member.id}
-                variants={cardVariants}
-                whileHover={{ y: -10 }}
-                onHoverStart={() => setHoveredMember(member.id)}
-                onHoverEnd={() => setHoveredMember(null)}
-              >
-                <Card className="relative overflow-hidden group bg-white/90 backdrop-blur-sm border-0 shadow-xl">
-                  {/* Gradient Border */}
-                  <div className="absolute inset-0 rounded-lg p-[2px] bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  
-                  <CardContent className="relative p-6">
-                    {/* Image Container */}
-                    <div className="relative mb-6">
-                      <div className="w-32 h-32 mx-auto rounded-full overflow-hidden">
-                        <img
-                          src={member.image || "/placeholder.svg"}
-                          alt={member.name}
-                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500"
-                        />
-                      </div>
-                      {/* Decorative  */}
-                      <motion.div
-                        className="absolute inset-0 border-2 rounded-full border-purple-500/20"
-                        animate={{
-                          scale: hoveredMember === member.id ? [1, 1.2, 1] : 1,
-                          opacity: hoveredMember === member.id ? [1, 0] : 1
-                        }}
-                        transition={{ duration: 1, repeat: hoveredMember === member.id ? Infinity : 0 }}
-                      />
-                    </div>
-
-                    {/* Content */}
-                    <div className="text-center">
-                      <h3 className="text-xl font-bold text-gray-800 mb-1">{member.name}</h3>
-                      <p className="text-purple-600 font-medium mb-3">{member.role}</p>
-                      <p className="text-gray-600 mb-4 text-sm">{member.bio}</p>
-                      
-                      {/* Expertise Tags */}
-                      <div className="flex flex-wrap justify-center gap-2 mb-4">
-                        {member.expertise.map((skill, index) => (
-                          <span
-                            key={index}
-                            className="text-xs px-2 py-1 rounded-full bg-purple-100 text-purple-600"
-                          >
-                            {skill}
-                          </span>
-                        ))}
-                      </div>
-
-                      {/* Social Links */}
-                      <div className="flex justify-center items-center gap-4">
-                        <motion.a
-                          href={member.social.linkedin}
-                          whileHover={{ scale: 1.2 }}
-                          className="text-gray-600 hover:text-blue-600 transition-colors"
-                        >
-                          <LinkedIn className="w-5 h-5" />
-                        </motion.a>
-                        <motion.a
-                          href={member.social.twitter}
-                          whileHover={{ scale: 1.2 }}
-                          className="text-gray-600 hover:text-blue-400 transition-colors"
-                        >
-                          <Twitter className="w-5 h-5" />
-                        </motion.a>
-                        <motion.a
-                          href={`mailto:${member.social.email}`}
-                          whileHover={{ scale: 1.2 }}
-                          className="text-gray-600 hover:text-purple-600 transition-colors"
-                        >
-                          <Mail className="w-5 h-5" />
-                        </motion.a>
-                      </div>
-
-                      {/* View Profile Button */}
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        className="mt-4 text-sm text-purple-600 font-semibold flex items-center justify-center mx-auto group/btn"
-                      >
-                        View Full Profile
-                        <ArrowUpRight className="w-4 h-4 ml-1 transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
-                      </motion.button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Bottom CTA */}
-          <motion.div
-            variants={cardVariants}
-            className="text-center mt-16"
-          >
-            <p className="text-gray-700 mb-4">
-              Want to join our team of changemakers?
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-purple-600 text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-purple-700 transition-colors duration-300"
-            >
-              
-            </motion.button>
-          </motion.div>
-        </motion.div>
+    <section className="py-20 bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100">
+      <div className="max-w-6xl mx-auto px-6">
+        <h2 className="text-4xl font-bold text-center text-gray-800 mb-8">Our Leadership</h2>
+        <Tabs defaultValue="board" className="mb-12">
+          <TabsList className="flex justify-center mb-6 space-x-4">
+            <TabsTrigger value="board">Board of Directors</TabsTrigger>
+            <TabsTrigger value="management">Management Team</TabsTrigger>
+          </TabsList>
+          <TabsContent value="board">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {teams.board.map((member) => (
+                <TeamMemberCard key={member.id} member={member} />
+              ))}
+            </div>
+          </TabsContent>
+          <TabsContent value="management">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {teams.management.map((member) => (
+                <TeamMemberCard key={member.id} member={member} />
+              ))}
+            </div>
+          </TabsContent>
+        </Tabs>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default TeamSection
+export default TeamSection;

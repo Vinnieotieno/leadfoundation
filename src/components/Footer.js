@@ -4,30 +4,58 @@ import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion"
-import { Facebook, Twitter, Linkedin, Instagram, Mail, ArrowRight, MapPin, Phone, ExternalLink, ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react'
+import {
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+  Mail,
+  ArrowRight,
+  MapPin,
+  Phone,
+  ChevronLeft,
+  ChevronRight,
+  ChevronDown,
+  ChevronUp,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
 const socialLinks = [
-  { name: "Facebook", icon: Facebook, href: "#", color: "hover:bg-blue-600" },
-  { name: "Twitter", icon: Twitter, href: "#", color: "hover:bg-blue-400" },
+  { name: "Facebook", icon: Facebook, href: "https://www.facebook.com/myemissary", color: "hover:bg-blue-600" },
+  {
+    name: "Twitter",
+    icon: Twitter,
+    href: "https://x.com/Lead_F_Africa?t=e-qO8kcenHeMhr0j95evcQ&s=09",
+    color: "hover:bg-blue-400",
+  },
   { name: "LinkedIn", icon: Linkedin, href: "#", color: "hover:bg-blue-700" },
-  { name: "Instagram", icon: Instagram, href: "#", color: "hover:bg-pink-600" },
+  {
+    name: "Instagram",
+    icon: Instagram,
+    href: "https://www.instagram.com/lead_foundationafrica?igsh=cDBqZTVhczFoemcx",
+    color: "hover:bg-pink-600",
+  },
 ]
 
 const partners = [
-  { name: "Global Impact Initiative", logo: "/logo.png", website: "https://www.globalimpact.org", description: "Driving global change through collaborative initiatives." },
-  { name: "EcoTech Solutions", logo: "/logo.png", website: "https://www.ecotechsolutions.com", description: "Innovative technology for a sustainable future." },
-  { name: "African Youth Network", logo: "/logo.png", website: "https://www.africanyouthnetwork.org", description: "Empowering the next generation of African leaders." },
-  { name: "Sustainable Futures Foundation", logo: "/logo.png", website: "https://www.sustainablefutures.org", description: "Building a sustainable world for generations to come." },
-  { name: "Education for All", logo: "/logo.png", website: "https://www.educationforall.org", description: "Ensuring quality education reaches every corner of Africa." },
-  { name: "Clean Water Initiative", logo: "/logo.png", website: "https://www.cleanwaterinitiative.org", description: "Providing access to clean and safe water across communities." },
+  {
+    name: "Bethesda Joyland Centre Academy",
+    logo: "/b.png",
+    href: "/partners/bethesda-joyland",
+
+  },
+  /*{ name: "EcoTech Solutions", logo: "/logo.png", href: "/partners/ecotech", description: "Innovative technology for a sustainable future." },
+  { name: "African Youth Network", logo: "/logo.png", href: "/partners/african-youth", description: "Empowering the next generation of African leaders." },
+  { name: "Sustainable Futures Foundation", logo: "/logo.png", href: "/partners/sustainable-futures", description: "Building a sustainable world for generations to come." },
+  { name: "Education for All", logo: "/logo.png", href: "/partners/education-for-all", description: "Ensuring quality education reaches every corner of Africa." },
+  { name: "Clean Water Initiative", logo: "/logo.png", href: "/partners/clean-water", description: "Providing access to clean and safe water across communities." },*/
 ]
 
 const FooterSection = ({ title, children }) => (
-  <motion.div 
-    initial={{ opacity: 0, y: 20 }} 
-    animate={{ opacity: 1, y: 0 }} 
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5 }}
     className="mb-8 md:mb-0"
   >
@@ -62,8 +90,8 @@ const PartnerLogo = ({ partner, isActive, onClick }) => {
         <div className="text-white text-center p-4">
           <h4 className="font-bold mb-2">{partner.name}</h4>
           <p className="text-sm">{partner.description}</p>
-          <Link href={partner.website} target="_blank" rel="noopener noreferrer" className="mt-2 inline-block">
-            <ExternalLink className="w-6 h-6" />
+          <Link href={partner.href} className="mt-2 inline-block">
+            <ArrowRight className="w-6 h-6" />
           </Link>
         </div>
       </motion.div>
@@ -77,7 +105,7 @@ const PartnersCarousel = () => {
   const containerRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start end", "end start"]
+    offset: ["start end", "end start"],
   })
   const y = useTransform(scrollYProgress, [0, 1], [0, -50])
 
@@ -142,12 +170,7 @@ const PartnersCarousel = () => {
           ))}
         </div>
       </motion.div>
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="mt-4 w-full"
-      >
+      <Button variant="outline" size="sm" onClick={() => setIsExpanded(!isExpanded)} className="mt-4 w-full">
         {isExpanded ? (
           <>
             <ChevronUp className="w-4 h-4 mr-2" />
@@ -170,7 +193,7 @@ export default function Footer() {
 
   const handleSubscribe = (e) => {
     e.preventDefault()
-    
+
     setIsSubscribed(true)
     setEmail("")
     setTimeout(() => setIsSubscribed(false), 3000)
@@ -273,7 +296,7 @@ export default function Footer() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="border-t border-gray-300/50 mt-12 pt-8 text-center"
+          className="border-t border-gray-500/50 mt-12 pt-8 text-center"
         >
           <p className="text-gray-600">
             &copy; {new Date().getFullYear()} Lead Africa Foundation. All rights reserved.
@@ -283,3 +306,4 @@ export default function Footer() {
     </footer>
   )
 }
+
